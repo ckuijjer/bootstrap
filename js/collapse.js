@@ -7,17 +7,30 @@
  * ======================================================================== */
 
 
+ // The + sign is used to force the JavaScript compiler into seeing the next statement
+ // as a function expression.
+ // Immediately Invoked Function Expression (IIFE) used to scope all variables.
 +function ($) {
+  // Use strict mode (see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode)
   'use strict';
 
   // COLLAPSE PUBLIC CLASS DEFINITION
   // ================================
 
+  // constructor
   var Collapse = function (element, options) {
-    this.$element      = $(element)
+    // create a jQuery object from the element
+    this.$element      = $(element) 
+
+    // $.extend is used to create a options dictionary. It starts with the empty object {}, adds the default
+    // properties and adds/overwrites using the options parameter
     this.options       = $.extend({}, Collapse.DEFAULTS, options)
+
+    // create a jQuery object containing all elements that trigger the collapse
     this.$trigger      = $('[data-toggle="collapse"][href="#' + element.id + '"],' +
-                           '[data-toggle="collapse"][data-target="#' + element.id + '"]')
+                           '[data-toggle="collapse"][data-target="#' + element.id + '"]') 
+
+    // is the element currently being collapsed / expanded?
     this.transitioning = null
 
     if (this.options.parent) {
